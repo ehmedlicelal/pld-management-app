@@ -18,6 +18,7 @@ function loadSessionsRouterWithMocks() {
             createSession: async (req, res) => res.status(200).json({ ok: true, action: 'createSession', role: req.user?.role ?? null }),
             getMySessions: async (req, res) => res.status(200).json({ ok: true, action: 'getMySessions' }),
             getJoinableSessions: async (req, res) => res.status(200).json({ ok: true, action: 'getJoinableSessions' }),
+            addStudent: async (req, res) => res.status(200).json({ ok: true, action: 'addStudent' }),
             joinSession: async (req, res) => res.status(200).json({ ok: true, action: 'joinSession' }),
             getSession: async (req, res) => res.status(200).json({ ok: true, action: 'getSession' }),
             updateNote: async (req, res) => res.status(200).json({ ok: true, action: 'updateNote' }),
@@ -28,7 +29,12 @@ function loadSessionsRouterWithMocks() {
             sendFeedback: async (req, res) => res.status(200).json({ ok: true, action: 'sendFeedback' }),
             sendAllFeedback: async (req, res) => res.status(200).json({ ok: true, action: 'sendAllFeedback' }),
             deleteAllSessions: async (req, res) => res.status(200).json({ ok: true, action: 'deleteAllSessions' }),
+            updateSession: async (req, res) => res.status(200).json({ ok: true, action: 'updateSession' }),
+            removeStudent: async (req, res) => res.status(200).json({ ok: true, action: 'removeStudent' }),
             deleteSession: async (req, res) => res.status(200).json({ ok: true, action: 'deleteSession' }),
+            submitCode: async (req, res) => res.status(200).json({ ok: true, action: 'submitCode' }),
+            toggleStudentWorkshopPermission: async (req, res) => res.status(200).json({ ok: true, action: 'toggleStudentWorkshopPermission' }),
+            updateWorkshopCode: async (req, res) => res.status(200).json({ ok: true, action: 'updateWorkshopCode' }),
             endSession: async (req, res) => res.status(200).json({ ok: true, action: 'endSession' }),
             getLeaderboard: async (req, res) => res.status(200).json({ ok: true, action: 'getLeaderboard' })
         }
