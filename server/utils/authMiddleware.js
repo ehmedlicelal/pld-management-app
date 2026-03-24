@@ -5,13 +5,8 @@ const { getJwtSecret } = require('./jwtSecret');
 const SECRET = getJwtSecret();
 
 module.exports = (req, res, next) => {
-    const adminPass = req.headers['x-admin-password'];
-    const validAdminPass = process.env.VITE_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
-
-    if (adminPass && validAdminPass && adminPass === validAdminPass) {
-        req.user = { id: 'admin', role: 'admin' };
-        return next();
-    }
+    // 🛡️ Sentinel: Removed insecure hardcoded admin password bypass via headers
+    // Admin access should be handled by standard JWT verification and role checks.
 
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).json({ error: 'No token provided' });
