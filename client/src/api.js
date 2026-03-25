@@ -226,9 +226,17 @@ export const getLeaderboard = (major = null) => {
     return api.get(url);
 };
 
+// Helper to get auth headers (specifically needed for admin routes due to tests)
+export const getAuthHeaders = () => {
+    return {
+        Authorization: `Bearer ${accessToken}`,
+        'x-admin-password': import.meta.env.VITE_ADMIN_PASSWORD || ''
+    };
+};
+
 // Admin API
-export const getAdminUsers = () => api.get('/api/users/admin');
-export const deleteUserAccount = (id) => api.delete(`/api/users/admin/${id}`);
+export const getAdminUsers = () => api.get('/api/admin/users', { headers: getAuthHeaders() });
+export const deleteUserAccount = (id) => api.delete(`/api/admin/users/${id}`, { headers: getAuthHeaders() });
 
 // Majors API
 export const getMajors = () => api.get('/api/majors');
