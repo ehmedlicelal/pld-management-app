@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "https://pld-management-app-production.up.railway.app/api/:path*"
+            "destination": "https://pld-backend-dfcx.onrender.com/api/:path*"
         },
         {
             "source": "/(.*)",
