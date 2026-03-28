@@ -84,6 +84,10 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+app.get('/ping', (req, res) => {
+    res.send('I am awake!');
+});
+
 // Discord Bot Setup
 const client = new Client({
     intents: [
