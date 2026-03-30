@@ -20,7 +20,9 @@ export default function Layout({ children }) {
     navigate('/login');
   };
 
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const isAdminPath = location.pathname.startsWith('/admin');
+  const isAdminAuthenticated = sessionStorage.getItem('adminAuth') === 'true';
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register' || (isAdminPath && !isAdminAuthenticated);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
