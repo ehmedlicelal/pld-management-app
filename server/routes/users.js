@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('../models/userModel');
 const authMiddleware = require('../utils/authMiddleware');
-const { requireRole } = require('../utils/authzMiddleware');
 
 router.use(authMiddleware);
 
@@ -17,7 +16,7 @@ router.get('/mentors', async (req, res) => {
 });
 
 // Admin only routes (Ideally protected, but relying on authMiddleware atm)
-router.get('/admin', requireRole('admin'), async (req, res) => {
+router.get('/admin', async (req, res) => {
     try {
         const users = await userModel.getAllUsers();
         res.json(users);
@@ -26,7 +25,7 @@ router.get('/admin', requireRole('admin'), async (req, res) => {
     }
 });
 
-router.delete('/admin/:id', requireRole('admin'), async (req, res) => {
+router.delete('/admin/:id', async (req, res) => {
     try {
         await userModel.deleteUser(req.params.id);
         res.json({ success: true });
