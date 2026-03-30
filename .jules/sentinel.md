@@ -1,0 +1,7 @@
+## 2024-05-24 - [CRITICAL] Insecure Admin Route Exposing Passwords
+**Vulnerability:** The `/admin` and `/admin/:id` endpoints in `server/routes/users.js` were accessible to any user authenticated via `authMiddleware` because they lacked proper role-based authorization checks (`requireRole('admin')`). Furthermore, the `userModel.getAllUsers()` call returned the entire user object, directly leaking the BCrypt password hashes of all users in the system to any student or mentor.
+**Learning:** Never rely solely on a general authentication middleware (`authMiddleware`) to protect sensitive administrative actions. Always strictly enforce role-based access control (RBAC). Additionally, backend endpoints should never blindly serialize entire database models, but rather explicitly construct response objects that exclude sensitive fields like password hashes, or the data access layer should strip them before returning.
+**Prevention:**
+1. Explicitly protect all administrative routes using `requireRole('admin')` or equivalent authorization middleware.
+2. Ensure that endpoints performing data retrieval apply proper Data Transfer Object (DTO) patterns or omit sensitive fields before serialization.
+3. Review and audit all routes to confirm that sensitive administrative endpoints are not inadvertently exposed on generic user routers.
