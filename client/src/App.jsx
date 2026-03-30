@@ -107,9 +107,7 @@ export default function App() {
             } />
             
             <Route path="/admin/*" element={
-              <ProtectedRoute allowedRoles={['admin', 'mentor']}>
-                <AdminPanel />
-              </ProtectedRoute>
+              <AdminPanel />
             } />
             
             <Route path="/practice" element={
