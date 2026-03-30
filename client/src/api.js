@@ -53,6 +53,14 @@ api.interceptors.request.use(
 
         const token = accessToken; // Use internal module state
         const wasLoggedIn = localStorage.getItem('wasLoggedIn') === 'true';
+        
+        const isAdmin = sessionStorage.getItem('adminAuth') === 'true';
+        const adminPass = import.meta.env.VITE_ADMIN_PASSWORD;
+
+        if (isAdmin && adminPass) {
+            config.headers['x-admin-password'] = adminPass;
+        }
+
 
         // Proactive Refresh: 
         // 1. If token is missing but user was previously logged in (Optimistic UI case)
@@ -218,13 +226,9 @@ export const getLeaderboard = (major = null) => {
     return api.get(url);
 };
 
-const getAuthHeaders = () => {
-    return {};
-};
-
 // Admin API
-export const getAdminUsers = () => api.get('/api/users/admin', { headers: getAuthHeaders() });
-export const deleteUserAccount = (id) => api.delete(`/api/users/admin/${id}`, { headers: getAuthHeaders() });
+export const getAdminUsers = () => api.get('/api/users/admin');
+export const deleteUserAccount = (id) => api.delete(`/api/users/admin/${id}`);
 
 // Majors API
 export const getMajors = () => api.get('/api/majors');
