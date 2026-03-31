@@ -14,17 +14,11 @@ const AdminLogin = () => {
         return <Navigate to="/admin" replace />;
     }
 
+    // Removing the logic that references VITE_ADMIN_PASSWORD
+    // This login is no longer functional due to auth migration. Admin logic should be handled through standard user login with roles.
     const handleLogin = (e) => {
         e.preventDefault();
-        const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
-        if (correctPassword && loginData.username === 'admin' && loginData.password === correctPassword) {
-            sessionStorage.setItem('adminAuth', 'true');
-            setError('');
-            toast.success('Admin login successful');
-            navigate('/admin');
-        } else {
-            setError('Invalid Admin Credentials');
-        }
+        setError('Admin login form is deprecated. Please log in using the main page with an admin account.');
     };
 
     return (

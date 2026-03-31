@@ -19,7 +19,10 @@ function loadSessionsRouterWithMocks() {
             getMySessions: async (req, res) => res.status(200).json({ ok: true, action: 'getMySessions' }),
             getJoinableSessions: async (req, res) => res.status(200).json({ ok: true, action: 'getJoinableSessions' }),
             joinSession: async (req, res) => res.status(200).json({ ok: true, action: 'joinSession' }),
+            addStudent: async (req, res) => res.status(200).json({ ok: true, action: 'addStudent' }),
             getSession: async (req, res) => res.status(200).json({ ok: true, action: 'getSession' }),
+            updateSession: async (req, res) => res.status(200).json({ ok: true, action: 'updateSession' }),
+            removeStudent: async (req, res) => res.status(200).json({ ok: true, action: 'removeStudent' }),
             updateNote: async (req, res) => res.status(200).json({ ok: true, action: 'updateNote' }),
             saveResult: async (req, res) => res.status(200).json({ ok: true, action: 'saveResult' }),
             updateGrade: async (req, res) => res.status(200).json({ ok: true, action: 'updateGrade' }),
@@ -30,7 +33,10 @@ function loadSessionsRouterWithMocks() {
             deleteAllSessions: async (req, res) => res.status(200).json({ ok: true, action: 'deleteAllSessions' }),
             deleteSession: async (req, res) => res.status(200).json({ ok: true, action: 'deleteSession' }),
             endSession: async (req, res) => res.status(200).json({ ok: true, action: 'endSession' }),
-            getLeaderboard: async (req, res) => res.status(200).json({ ok: true, action: 'getLeaderboard' })
+            submitCode: async (req, res) => res.status(200).json({ ok: true, action: 'submitCode' }),
+            toggleStudentWorkshopPermission: async (req, res) => res.status(200).json({ ok: true, action: 'toggleStudentWorkshopPermission' }),
+            getLeaderboard: async (req, res) => res.status(200).json({ ok: true, action: 'getLeaderboard' }),
+            updateWorkshopCode: async (req, res) => res.status(200).json({ ok: true, action: 'updateWorkshopCode' })
         }
     };
 
