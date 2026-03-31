@@ -31,7 +31,8 @@ const options = {
             { name: 'AI', description: 'AI features' },
             { name: 'Admin', description: 'Admin operations' },
             { name: 'Users', description: 'User management' },
-            { name: 'Majors', description: 'Majors management' }
+            { name: 'Majors', description: 'Majors management' },
+            { name: 'Workshops', description: 'Workshop code editing and permission management' }
         ],
         components: {
             securitySchemes: {
