@@ -168,7 +168,40 @@ async function evaluateCode(language, code, tutorMode = false, expectedOutput = 
 const { scanCode } = require('../services/securityScanner');
 const { runCode } = require('../services/codeRunner');
 
-// POST /api/ai/evaluate
+/**
+ * @swagger
+ * tags:
+ *   name: AI
+ *   description: AI-powered code evaluation and mentoring
+ */
+
+/**
+ * @swagger
+ * /api/ai/evaluate:
+ *   post:
+ *     summary: Evaluate code snippet (sandbox or AI-predicted)
+ *     tags: [AI]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               language:
+ *                 type: string
+ *               code:
+ *                 type: string
+ *               tutorMode:
+ *                 type: boolean
+ *               expectedOutput:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Evaluation result
+ */
 router.post('/evaluate', authMiddleware, async (req, res) => {
     try {
         const { language, code, tutorMode, expectedOutput } = req.body;
@@ -224,7 +257,33 @@ router.post('/evaluate', authMiddleware, async (req, res) => {
     }
 });
 
-// POST /api/ai/tutor-review
+/**
+ * @swagger
+ * /api/ai/tutor-review:
+ *   post:
+ *     summary: Get AI tutor feedback on previously executed code
+ *     tags: [AI]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               language:
+ *                 type: string
+ *               code:
+ *                 type: string
+ *               expectedOutput:
+ *                 type: string
+ *               realOutput:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Tutor feedback
+ */
 router.post('/tutor-review', authMiddleware, async (req, res) => {
     try {
         const { language, code, expectedOutput, realOutput } = req.body;
@@ -248,7 +307,31 @@ router.post('/tutor-review', authMiddleware, async (req, res) => {
     }
 });
 
-// POST /api/ai/generate-practice
+/**
+ * @swagger
+ * /api/ai/generate-practice:
+ *   post:
+ *     summary: Generate practice questions
+ *     tags: [AI]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               topic:
+ *                 type: string
+ *               difficulty:
+ *                 type: string
+ *               count:
+ *                 type: number
+ *     responses:
+ *       200:
+ *         description: Array of questions
+ */
 router.post('/generate-practice', async (req, res) => {
     try {
         const { topic, difficulty, count } = req.body;
@@ -264,7 +347,33 @@ router.post('/generate-practice', async (req, res) => {
     }
 });
 
-// POST /api/ai/evaluate-practice
+/**
+ * @swagger
+ * /api/ai/evaluate-practice:
+ *   post:
+ *     summary: Evaluate user practice answer
+ *     tags: [AI]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               question:
+ *                 type: string
+ *               answer:
+ *                 type: string
+ *               topic:
+ *                 type: string
+ *               difficulty:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Evaluation result
+ */
 router.post('/evaluate-practice', async (req, res) => {
     try {
         const { question, answer, topic, difficulty } = req.body;
@@ -280,7 +389,35 @@ router.post('/evaluate-practice', async (req, res) => {
     }
 });
 
-// POST /api/ai/chat-tutor
+/**
+ * @swagger
+ * /api/ai/chat-tutor:
+ *   post:
+ *     summary: Chat with the AI tutor
+ *     tags: [AI]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *               mentorReport:
+ *                 type: object
+ *               studentLevel:
+ *                 type: string
+ *               chatHistory:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *     responses:
+ *       200:
+ *         description: AI Tutor response
+ */
 router.post('/chat-tutor', async (req, res) => {
     try {
         const { message, mentorReport, studentLevel, chatHistory } = req.body;
@@ -295,7 +432,31 @@ router.post('/chat-tutor', async (req, res) => {
     }
 });
 
-// POST /api/ai/generate-feedback (Discord)
+/**
+ * @swagger
+ * /api/ai/generate-feedback:
+ *   post:
+ *     summary: Generate feedback for Discord
+ *     tags: [AI]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               studentName:
+ *                 type: string
+ *               projectName:
+ *                 type: string
+ *               mentorNotes:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Feedback string
+ */
 router.post('/generate-feedback', async (req, res) => {
     try {
         const { studentName, projectName, mentorNotes } = req.body;

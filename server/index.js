@@ -1,4 +1,5 @@
 const express = require('express');
+const { swaggerUi, swaggerSpec } = require("./swagger");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
@@ -139,6 +140,7 @@ app.use('/register', require('./routes/register'));
 app.use('/verify', require('./routes/verify'));
 
 // Routes
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/sessions', require('./routes/sessions'));
 app.use('/api/students', require('./routes/students'));
