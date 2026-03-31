@@ -15,8 +15,8 @@ const options = {
                 description: "Local server",
             },
             {
-                url: "https://pld-ten.vercel.app",
-                description: "Production server",
+                url: "https://pld-backend-dfcx.onrender.com",
+                description: "Deployed Render Server",
             },
         ],
         tags: [
