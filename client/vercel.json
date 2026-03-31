@@ -1,12 +1,15 @@
 {
+    "redirects": [
+        {
+            "source": "/api-docs",
+            "destination": "/api-docs/",
+            "permanent": true
+        }
+    ],
     "rewrites": [
         {
             "source": "/api-docs/:path*",
             "destination": "https://pld-backend-dfcx.onrender.com/api-docs/:path*"
-        },
-        {
-            "source": "/api-docs",
-            "destination": "https://pld-backend-dfcx.onrender.com/api-docs"
         },
         {
             "source": "/api/:path*",
