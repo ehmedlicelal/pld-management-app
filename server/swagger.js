@@ -11,12 +11,12 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:5000",
-                description: "Local server",
-            },
-            {
                 url: "https://pld-backend-dfcx.onrender.com",
                 description: "Deployed Render Server",
+            },
+            {
+                url: "http://localhost:5000",
+                description: "Local server",
             },
         ],
         tags: [
