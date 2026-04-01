@@ -23,6 +23,12 @@ let failedQueue = [];
  * Update the internal access token and axios defaults.
  * Called by AuthContext to keep them in sync.
  */
+const getAuthHeaders = () => {
+    return {
+        Authorization: `Bearer ${accessToken}`
+    };
+};
+
 export const setAccessToken = (token) => {
     accessToken = token;
     if (token) {
@@ -227,8 +233,8 @@ export const getLeaderboard = (major = null) => {
 };
 
 // Admin API
-export const getAdminUsers = () => api.get('/api/users/admin');
-export const deleteUserAccount = (id) => api.delete(`/api/users/admin/${id}`);
+export const getAdminUsers = () => api.get('/api/users/admin', { headers: getAuthHeaders() });
+export const deleteUserAccount = (id) => api.delete(`/api/users/admin/${id}`, { headers: getAuthHeaders() });
 
 // Majors API
 export const getMajors = () => api.get('/api/majors');
