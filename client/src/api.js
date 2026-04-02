@@ -53,14 +53,6 @@ api.interceptors.request.use(
 
         const token = accessToken; // Use internal module state
         const wasLoggedIn = localStorage.getItem('wasLoggedIn') === 'true';
-        
-        const isAdmin = sessionStorage.getItem('adminAuth') === 'true';
-        const adminPass = import.meta.env.VITE_ADMIN_PASSWORD;
-
-        if (isAdmin && adminPass) {
-            config.headers['x-admin-password'] = adminPass;
-        }
-
 
         // Proactive Refresh: 
         // 1. If token is missing but user was previously logged in (Optimistic UI case)

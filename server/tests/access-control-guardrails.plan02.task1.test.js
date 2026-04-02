@@ -98,15 +98,14 @@ async function testAdminRoutesGuarding() {
 }
 
 function testAdminClientHeaders() {
+    // The client no longer passes manual headers in the API calls, as it uses an interceptor for the JWT token.
+    // The previous implementation relied on a getAuthHeaders() function, which was removed.
+    // The interceptor also no longer sends the x-admin-password header, preventing backend bypass.
     const source = fs.readFileSync(clientApiPath, 'utf8');
 
-    assert.match(
+    assert.doesNotMatch(
         source,
-        /export const getAdminUsers[\s\S]*headers:\s*getAuthHeaders\(\)/
-    );
-    assert.match(
-        source,
-        /export const deleteUserAccount[\s\S]*headers:\s*getAuthHeaders\(\)/
+        /x-admin-password/
     );
 }
 
