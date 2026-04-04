@@ -1,0 +1,4 @@
+## 2026-04-04 - [CRITICAL] Fixed x-admin-password Authentication Bypass
+**Vulnerability:** A backdoor existed where the `x-admin-password` header allowed any user to bypass JWT authentication and gain full admin privileges if they provided the correct `VITE_ADMIN_PASSWORD` (which was also exposed to the client in `api.js`).
+**Learning:** This was a severe authentication bypass that completely bypassed the standard JWT flow in `server/utils/authMiddleware.js`. It relied on a shared secret exposed to the client environment variables (`VITE_ADMIN_PASSWORD`), making it highly vulnerable to extraction and exploitation.
+**Prevention:** Never use hardcoded or simple shared secrets for admin access. Always rely on the established authentication and authorization mechanisms (e.g., JWT and role-based access control). Do not expose admin credentials to the frontend environment variables.
