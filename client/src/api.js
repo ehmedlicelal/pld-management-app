@@ -4,11 +4,11 @@ import { isTokenExpiringSoon } from './utils/tokenUtils';
 
 // In development, we use a Vite proxy to avoid CORS/Cookie issues between ports.
 // In production, we use the VITE_API_URL environment variable.
-const API_URL = ''; 
+const API_URL = import.meta.env.VITE_API_URL;
 
 // Create Axios instance
 const api = axios.create({
-    baseURL: API_URL, 
+    baseURL: API_URL,
     withCredentials: true, // Crucial for sending/receiving refresh token cookie
     headers: {
         'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ api.interceptors.request.use(
 
         const token = accessToken; // Use internal module state
         const wasLoggedIn = localStorage.getItem('wasLoggedIn') === 'true';
-        
+
         const isAdmin = sessionStorage.getItem('adminAuth') === 'true';
         const adminPass = import.meta.env.VITE_ADMIN_PASSWORD;
 
@@ -70,7 +70,7 @@ api.interceptors.request.use(
         if (needsRefresh && !config._retry) {
             try {
                 const newToken = await refreshToken();
-                
+
                 if (newToken) {
                     config.headers['Authorization'] = `Bearer ${newToken}`;
                 }
@@ -95,7 +95,7 @@ api.interceptors.response.use(
 
         if (error.response?.status === 401 && !originalRequest._retry && !originalRequest.url.includes('/auth/refresh-token')) {
             originalRequest._retry = true;
-            
+
             try {
                 // Wait for the queue if a refresh is already in progress
                 const newToken = await refreshToken();
@@ -155,8 +155,8 @@ export const refreshToken = async () => {
 
             // Break any infinite loop if refresh token itself is invalid
             if (err.response?.status === 401 || err.response?.status === 403) {
-                 console.warn('[AUTH CLIENT] Refresh token rejected. Logging out...');
-                 if (window.logoutUser) window.logoutUser();
+                console.warn('[AUTH CLIENT] Refresh token rejected. Logging out...');
+                if (window.logoutUser) window.logoutUser();
             }
 
             reject(err);
