@@ -1,0 +1,4 @@
+## 2024-05-25 - Missing Authorization on Admin Users Endpoints
+**Vulnerability:** The GET `/api/users/admin` and DELETE `/api/users/admin/:id` endpoints in `server/routes/users.js` lacked the `requireRole('admin')` middleware. This allowed any authenticated user to list all users and delete user accounts.
+**Learning:** Even if routes are prefixed with `/admin` and placed in a seemingly admin-only file or section, they might not be protected by role-based authorization if the middleware isn't explicitly applied to the route or router. Relying just on `authMiddleware` only ensures the user is logged in, not that they have the right privileges.
+**Prevention:** Always verify that every endpoint performing an administrative or sensitive action explicitly includes role-based authorization middleware (like `requireRole('admin')`), regardless of its URL path or file location.

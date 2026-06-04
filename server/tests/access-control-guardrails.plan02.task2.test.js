@@ -30,7 +30,13 @@ function loadSessionsRouterWithMocks() {
             deleteAllSessions: async (req, res) => res.status(200).json({ ok: true, action: 'deleteAllSessions' }),
             deleteSession: async (req, res) => res.status(200).json({ ok: true, action: 'deleteSession' }),
             endSession: async (req, res) => res.status(200).json({ ok: true, action: 'endSession' }),
-            getLeaderboard: async (req, res) => res.status(200).json({ ok: true, action: 'getLeaderboard' })
+            getLeaderboard: async (req, res) => res.status(200).json({ ok: true, action: 'getLeaderboard' }),
+            addStudent: async (req, res) => res.status(200).json({ ok: true, action: 'addStudent' }),
+            updateSession: async (req, res) => res.status(200).json({ ok: true, action: 'updateSession' }),
+            removeStudent: async (req, res) => res.status(200).json({ ok: true, action: 'removeStudent' }),
+            submitCode: async (req, res) => res.status(200).json({ ok: true, action: 'submitCode' }),
+            toggleStudentWorkshopPermission: async (req, res) => res.status(200).json({ ok: true, action: 'toggleStudentWorkshopPermission' }),
+            updateWorkshopCode: async (req, res) => res.status(200).json({ ok: true, action: 'updateWorkshopCode' })
         }
     };
 
